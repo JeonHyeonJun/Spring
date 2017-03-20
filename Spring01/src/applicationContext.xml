@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="gr" class="spring01.Greeting" 
+	init-method="initObj"
+	destroy-method="destroyObj"
+	></bean>	<!-- Greeting gr = new Greeting()와 같은의미 -->
+	<!-- lazy-init="true" 는 컨테이너를 불렀을때가 아닌 bean을 받았을때 객체를 생성한다 -->
+	<!-- scope singleton = 하나로 계속 재탕(기본) -->
+	<!-- scope prototype = getBean마다 새거생성 -->
+	<!-- scope request = 리퀘스트가 새로울때마다 새거생성 -->
+	<!-- scope session = 세션이 새로울때마다 새거생성 -->
+</beans>
