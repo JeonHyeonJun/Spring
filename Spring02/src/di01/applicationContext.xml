@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="car" class="di01.Car">
+		<constructor-arg ref="tire"></constructor-arg>
+		<!-- <property name="tire" ref="tire"></property> --><!-- 해당하는 클래스의 set이 들어가는 함수명이다.(set은빼고) -->
+	</bean>
+	<bean id="tire" class="di01.ChinaTire"></bean>
+
+</beans>
