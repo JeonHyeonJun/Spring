@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="start" class="di02.Game">
+		<constructor-arg ref="commend"></constructor-arg>
+	</bean>
+	<bean id="commend" class="di02.Defense"></bean>
+
+</beans>
