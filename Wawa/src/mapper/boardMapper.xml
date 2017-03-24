@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<insert id="insert" parameterType="board">
+		insert into board values(0,#{board_code},#{title},#{writer},#{content},
+		0,now(),#{category},#{petname},#{resist},#{lostdate},#{kind},
+		#{weight},#{age},#{sex},#{phone},#{email},#{birthday},#{starpoint},0)	
+	</insert>
+	<update id="update" parameterType="board">
+		update board set board_code=#{board_code}, title=#{title},
+		writer=#{writer}, content=#{content}, readcount=#{readcount},
+		writedate=#{writedate}, category=#{category}, petname=#{petname},
+		resist=#{resist}, lostdate=#{lostdate}, kind=#{kind}, 
+		weight=#{weight}, age=#{age}, sex=#{sex}, phone=#{phone},
+		email=#{email}, birthday=#{birthday}, starpoint=#{starpoint},
+		boastnum=#{boastnum} where board_idx=#{board_idx}
+	</update>	
+	<delete id="delete" parameterType="int">
+		delete from board where board_idx=#{board_idx}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="board">
+		<!-- 게시글번호로 게시글하나 선택 -->
+		select * from board where board_idx=#{board_idx}
+	</select>
+	<select id="selectBoardList" parameterType="int" resultType="board">
+		<!-- 게시판유형에 따른 게시글 보기 -->
+		select * from board where board_code=#{board_code}
+	</select>
+	<select id="selectAll" resultType="board">
+		<!-- 게시글 전체보기 -->
+		select * from board
+	</select>
+</mapper>
