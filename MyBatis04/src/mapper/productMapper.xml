@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IProductDao">
+
+	<resultMap type="product" id="id">
+		<id column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="pictureurl" property="picture"/>
+		<result column="description" property="description"/>
+	</resultMap>
+	
+	<insert id="insertProduct" parameterType="product">
+		insert into product values(0,#{name},#{price},#{picture},#{description})
+	</insert>
+	<update id="updateProduct" parameterType="product">
+		update product set name=#{name}, price=#{price}, pictureurl=#{picture}, description=#{description} where code=#{code}
+	</update>
+	<delete id="deleteProduct" parameterType="int">
+		delete from product where code=#{code}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="product">
+		select * from product where code=#{code}
+	</select>
+	<select id="selectAll" resultMap="id" >
+	<!-- select <include refid="columns"></include> from product where code=#{code} -->
+		select * from product
+	</select>
+</mapper>
