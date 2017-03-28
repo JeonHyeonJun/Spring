@@ -28,7 +28,7 @@ public class Test {
 		params.put("page", (page-1)*10);
 		
 		int first = (page-1)/10*10+1;
-		int finish = bd.selectAll().size()/10+1;
+		int finish = (bd.selectAll().size()-1)/10+1;
 		int last = first+9;
 		if(last > finish)
 			last = finish;
