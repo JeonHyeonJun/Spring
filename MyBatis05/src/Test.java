@@ -25,11 +25,12 @@ public class Test {
 		Scanner scan = new Scanner(System.in);
 		System.out.print("페이지수 입력 ");
 		int page = scan.nextInt();
+		int PAGECNT = 10;
 		params.put("page", (page-1)*10);
 		
-		int first = (page-1)/10*10+1;
+		int first = (page-1)/PAGECNT*PAGECNT+1;
 		int finish = (bd.selectAll().size()-1)/10+1;
-		int last = first+9;
+		int last = first+(PAGECNT-1);
 		if(last > finish)
 			last = finish;
 		if(page > finish)
