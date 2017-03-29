@@ -98,7 +98,19 @@ public class BoardDao implements IBoardDao{
 	}
 
 	@Override
-	public int selectGroup(int group_code) {
+	public int updateGroup(HashMap<String, Object> params) {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			return session.getMapper(IBoardDao.class).updateGroup(params);
+		}
+		finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectGroup(int group_code) {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
@@ -108,6 +120,8 @@ public class BoardDao implements IBoardDao{
 			session.close();
 		}
 	}
+
+	
 
 
 	

@@ -28,9 +28,19 @@ public class BoardService implements IBoardService{
 		}
 		else{
 			HashMap<String, Object> parentBoard = dao.selectOne(parent);
-			int max_seq = dao.selectGroup((int)parentBoard.get("group_code"));
-			params.put("group_code", parentBoard.get("num"));
-			params.put("group_seq", max_seq+1);
+			List<HashMap<String, Object>> group = dao.selectGroup((int)parentBoard.get("group_code"));
+			for(int i=0; i<group.size(); i++){
+				if((int)group.get(i).get("group_code") == (int)parentBoard.get("group_code")
+					&& (int)group.get(i).get("group_seq") > (int)parentBoard.get("group_seq") ){
+					group.get(i).put("num", group.get(i).get("num"));
+					group.get(i).put("group_seq", (int)group.get(i).get("group_seq")+1);
+					dao.updateGroup(group.get(i));
+				}
+			}
+			
+//			int max_seq = dao.selectGroup((int)parentBoard.get("group_code"));
+			params.put("group_code", parentBoard.get("group_code"));
+			params.put("group_seq", (int)parentBoard.get("group_seq")+1);
 			params.put("group_lv", (int)parentBoard.get("group_lv")+1);
 			result = dao.updateBoard(params);
 		}

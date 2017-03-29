@@ -69,7 +69,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBoardCount" resultType="int">
 		select count(*) from board
 	</select>
-	<select id="selectGroup" parameterType="int" resultType="int">
-		select max(group_seq) from board where group_code=#{group_code}
+	<update id="updateGroup" parameterType="java.util.HashMap">
+		update board set group_seq = #{group_seq}
+		where num =  #{num}
+	</update>
+	<select id="selectGroup" parameterType="int" resultType="java.util.HashMap">
+		select * from board where group_code = #{group_code}
 	</select>
 </mapper>

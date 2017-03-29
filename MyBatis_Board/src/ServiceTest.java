@@ -6,9 +6,11 @@ import service.IBoardService;
 public class ServiceTest {
 	public static void main(String[] args) {
 		IBoardService service = new BoardService();
-		service.writeBoard("123", "title", "content", "name", "email", 121);
-		for(HashMap<String, Object> h : service.getBoardList(11))
-			System.out.println(h);
+		service.writeBoard("123", "title", "content", "name", "email", 149);
+//		select * from board order by group_code desc, group_seq asc limit 0, 10;
+		
+//		for(HashMap<String, Object> h : service.getBoardList(1))
+//			System.out.println(h);
 //		System.out.println(service.getBoardList(11));
 	}
 }

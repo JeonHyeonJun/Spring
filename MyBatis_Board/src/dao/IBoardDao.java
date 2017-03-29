@@ -10,7 +10,9 @@ public interface IBoardDao {
 	public HashMap<String, Object> selectOne(int num);
 	public List<HashMap<String, Object>> selectBoardLimit(HashMap<String, Object> params);
 	public int getBoardCount();
-	public int selectGroup(int group_code);
+	public int updateGroup(HashMap<String, Object> params);
+	public List<HashMap<String, Object>> selectGroup(int group_code);
+//	public int selectGroup(int group_code);
 //	public List<HashMap<String, Object>> selectAll();
 //	public List<HashMap<String, Object>> selectBySearch(HashMap<String, Object> params);
 }
