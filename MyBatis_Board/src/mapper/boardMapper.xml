@@ -73,7 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update board set group_seq = #{group_seq}
 		where num =  #{num}
 	</update>
-	<select id="selectGroup" parameterType="int" resultType="java.util.HashMap">
-		select * from board where group_code = #{group_code}
+	<update id="increaseGroupSeq" parameterType="java.util.HashMap">
+		update board set group_seq = group_seq+1 
+		where group_code = #{group_code} and group_seq > #{group_seq}
+	</update>
+	<select id="selectReple" resultType="java.util.HashMap">
+		select * from board order by group_code desc, group_seq asc limit 0,10;
 	</select>
 </mapper>

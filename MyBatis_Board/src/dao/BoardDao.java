@@ -110,11 +110,23 @@ public class BoardDao implements IBoardDao{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> selectGroup(int group_code) {
+	public int increaseGroupSeq(HashMap<String, Object> params) {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 		try{
-			return session.getMapper(IBoardDao.class).selectGroup(group_code);
+			return session.getMapper(IBoardDao.class).increaseGroupSeq(params);
+		}
+		finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectReple() {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		try{
+			return session.getMapper(IBoardDao.class).selectReple();
 		}
 		finally {
 			session.close();

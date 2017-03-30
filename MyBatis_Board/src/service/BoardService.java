@@ -21,27 +21,34 @@ public class BoardService implements IBoardService{
 		params.put(Constant.EMAIL, email);
 		int result = dao.insertBoard(params);
 		if(parent == 0 ){
-			params.put("group_code", params.get("num"));
-			params.put("group_seq", 0);
-			params.put("group_lv", 0);
+			params.put(Constant.GROUP_CODE, params.get("num"));
+			params.put(Constant.GROUP_SEQ, 0);
+			params.put(Constant.GROUP_LV, 0);
 			result = dao.updateBoard(params);
 		}
 		else{
 			HashMap<String, Object> parentBoard = dao.selectOne(parent);
-			List<HashMap<String, Object>> group = dao.selectGroup((int)parentBoard.get("group_code"));
-			for(int i=0; i<group.size(); i++){
-				if((int)group.get(i).get("group_code") == (int)parentBoard.get("group_code")
-					&& (int)group.get(i).get("group_seq") > (int)parentBoard.get("group_seq") ){
-					group.get(i).put("num", group.get(i).get("num"));
-					group.get(i).put("group_seq", (int)group.get(i).get("group_seq")+1);
-					dao.updateGroup(group.get(i));
-				}
-			}
+			int group_code = (int)parentBoard.get(Constant.GROUP_CODE);
+			int group_seq = (int)parentBoard.get(Constant.GROUP_SEQ);
+			int group_lv = (int)parentBoard.get(Constant.GROUP_LV);
+			HashMap<String, Object> params2 = new HashMap<>();
+			params2.put(Constant.GROUP_CODE, group_code);
+			params2.put(Constant.GROUP_SEQ, group_seq);
+			dao.increaseGroupSeq(params2);
+//			List<HashMap<String, Object>> group = dao.selectGroup((int)parentBoard.get("group_code"));
+//			for(int i=0; i<group.size(); i++){
+//				if((int)group.get(i).get("group_code") == (int)parentBoard.get("group_code")
+//					&& (int)group.get(i).get("group_seq") > (int)parentBoard.get("group_seq") ){
+//					group.get(i).put("num", group.get(i).get("num"));
+//					group.get(i).put("group_seq", (int)group.get(i).get("group_seq")+1);
+//					dao.updateGroup(group.get(i));
+//				}
+//			}
 			
 //			int max_seq = dao.selectGroup((int)parentBoard.get("group_code"));
-			params.put("group_code", parentBoard.get("group_code"));
-			params.put("group_seq", (int)parentBoard.get("group_seq")+1);
-			params.put("group_lv", (int)parentBoard.get("group_lv")+1);
+			params.put("group_code", parentBoard.get(Constant.GROUP_CODE));
+			params.put("group_seq", (int)parentBoard.get(Constant.GROUP_SEQ)+1);
+			params.put("group_lv", (int)parentBoard.get(Constant.GROUP_LV)+1);
 			result = dao.updateBoard(params);
 		}
 		if(result > 0)
@@ -114,6 +121,13 @@ public class BoardService implements IBoardService{
 		result.put("boardList", list);
 		
 		return (List<HashMap<String, Object>>) result.get("boardList");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getBoardReple() {
+		// TODO Auto-generated method stub
+		List<HashMap<String, Object>> list = dao.selectReple();
+		return list;
 	}
 
 

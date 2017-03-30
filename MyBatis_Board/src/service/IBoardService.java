@@ -9,4 +9,5 @@ public interface IBoardService {
 	public boolean deleteBoard(int num);
 	public HashMap<String, Object> readBoard(int num);
 	public List<HashMap<String, Object>> getBoardList(int page);
+	public List<HashMap<String, Object>> getBoardReple();
 }
