@@ -97,17 +97,6 @@ public class BoardDao implements IBoardDao{
 		}
 	}
 
-	@Override
-	public int updateGroup(HashMap<String, Object> params) {
-		// TODO Auto-generated method stub
-		SqlSession session = sqlSessionFactory.openSession();
-		try{
-			return session.getMapper(IBoardDao.class).updateGroup(params);
-		}
-		finally {
-			session.close();
-		}
-	}
 
 	@Override
 	public int increaseGroupSeq(HashMap<String, Object> params) {

@@ -69,10 +69,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getBoardCount" resultType="int">
 		select count(*) from board
 	</select>
-	<update id="updateGroup" parameterType="java.util.HashMap">
-		update board set group_seq = #{group_seq}
-		where num =  #{num}
-	</update>
 	<update id="increaseGroupSeq" parameterType="java.util.HashMap">
 		update board set group_seq = group_seq+1 
 		where group_code = #{group_code} and group_seq > #{group_seq}
