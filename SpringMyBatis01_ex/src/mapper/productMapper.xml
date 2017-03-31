@@ -3,13 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.IProductDao">
-	<insert id="insert" parameterType="product">
+	<insert id="insertProduct" parameterType="product">
 		insert into product values(0,#{name},#{price},#{pictureurl},#{description})
 	</insert>
-	<update id="update" parameterType="product">
+	<update id="updateProduct" parameterType="product">
 		update product set name=#{name}, price=#{price} where code=#{code}
 	</update>
-	<delete id="delete" parameterType="int">
+	<delete id="deleteProduct" parameterType="int">
 		delete from product where code=#{code}
 	</delete>
 	<select id="selectOne" parameterType="int" resultType="product">
