@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IBoardDao">
+	<insert id="insertBoard" parameterType="board">
+		insert into board values(0,#{name},#{pass},#{content},#{email},0,sysdate(),#{title},0,0,0)
+	</insert>
+	<update id="updateBoard" parameterType="board">
+		update board set name=#{name}, pass={pass}, content=#{content}, email=#{email}
+		title=#{title} where num=#{num}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where num=#{num}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="board">
+		select * from board where num=#{num}
+	</select>
+	<select id="selectAll" resultType="board">
+		select * from board
+	</select>
+</mapper>
