@@ -10,12 +10,12 @@
 	
 	<aop:config>
 		<aop:aspect ref="person">
-			<aop:pointcut expression="execution(public void aop01.*.doSomething())" id="pt"/>
-<!-- 			<aop:before method="doBefore" pointcut-ref="pt"/>
-			<aop:after-returning method="doAfterReturning" pointcut-ref="pt"/>
-			<aop:after-throwing method="doAfterThrowing" pointcut-ref="pt"/>
+ 			<aop:pointcut expression="execution(public * aop01.*.doSomething())" id="pt"/>
+<!--  			<aop:before method="doBefore" pointcut-ref="pt"/>
+			<aop:after-returning method="doAfterReturning" pointcut-ref="pt" returning="rt"/>
+			<aop:after-throwing method="doAfterThrowing" pointcut-ref="pt" throwing="th"/>
 			<aop:after method="doAfter" pointcut-ref="pt"/> -->
-			<aop:around method="around" pointcut-ref="pt"/>
+			<aop:around method="around" pointcut-ref="pt"/> 
 		</aop:aspect>
 	</aop:config>
 </beans>
