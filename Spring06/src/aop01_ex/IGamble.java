@@ -1,5 +1,5 @@
-package aop02;
+package aop01_ex;
 
 public interface IGamble {
-	public void result();
+	public String result();
 }
