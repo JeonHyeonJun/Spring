@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IProductDao">
+<insert id="insertProduct" parameterType="java.util.HashMap">
+	insert into product values(0,#{name},#{price},#{pictureurl},#{description})
+</insert>
+<update id="updateProduct" parameterType="java.util.HashMap">
+	update product set price=#{price} where code=#{code}
+</update>
+<delete id="deleteProduct" parameterType="int">
+	delete from product where code=#{code}
+</delete>
+<select id="selectCode" parameterType="int" resultType="java.util.HashMap">
+	select * from product where code like CONCAT('%',#{code},'%')
+</select>
+<select id="selectAll" resultType="java.util.HashMap">
+	select * from product
+</select>
+<select id="selectName" parameterType="String" resultType="java.util.HashMap">
+	select * from product where name like CONCAT('%',#{name},'%')
+</select>
+</mapper>
