@@ -12,13 +12,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="deleteProduct" parameterType="int">
 	delete from product where code=#{code}
 </delete>
-<select id="selectCode" parameterType="int" resultType="java.util.HashMap">
-	select * from product where code like CONCAT('%',#{code},'%')
-</select>
 <select id="selectAll" resultType="java.util.HashMap">
 	select * from product
 </select>
-<select id="selectName" parameterType="String" resultType="java.util.HashMap">
-	select * from product where name like CONCAT('%',#{name},'%')
+<select id="selectSearch" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from product where ${type} like CONCAT('%',#{keyword},'%')
+</select>
+<select id="동적쿼리" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from product where 1=1 
+	<if test="type == 1">
+	code like CONCAT('%',#{code},'%')
+	</if>
+	<if test="type == 2"> 
+	and name like CONCAT('%',#{name},'%')
+	</if>
 </select>
 </mapper>

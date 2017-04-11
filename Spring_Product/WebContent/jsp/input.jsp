@@ -9,7 +9,7 @@
 <body>
 	<center>
 	<h1>상품추가</h1><hr>
-	<form action="input.do">
+	<form action="/Spring_Product/input.do" method="post" >
 		<table>
 		<tr><td>상품명</td><td><input type="text" name="name"></td></tr>
 		<tr><td>가격</td><td><input type="text" name="price"></td></tr>

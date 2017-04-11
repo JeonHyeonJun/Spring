@@ -17,14 +17,9 @@ public class ProductController {
 	private IProductService service;
 	
 	@RequestMapping("input.do")
-	public ModelAndView input(String name, int price, String pictureurl, String description){
-		boolean result = service.insertProduct(name, price, pictureurl, description);
-		ModelAndView mav = new ModelAndView();
-		if(result)
-			mav.setViewName("redirect:main.do");
-		else
-			System.out.println("자살");
-		return mav;
+	public String input(String name, int price, String pictureurl, String description){
+		service.insertProduct(name, price, pictureurl, description);
+		return "redirect:main.do";
 	}
 	
 	@RequestMapping("main.do")
@@ -35,6 +30,7 @@ public class ProductController {
 		mav.setViewName("list");
 		return mav;
 	}
+	
 	
 	@RequestMapping("update.do")
 	public ModelAndView update(int code, int price){
@@ -63,16 +59,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping("search.do")
-	public ModelAndView search(int type, String keyword){
+	public ModelAndView search(String type, String keyword){
 		ModelAndView mav = new ModelAndView();
-		if(type == 1){
-			List<HashMap<String, Object>> list = service.selectName(keyword);
-			mav.addObject("list", list);
-		}
-		else if(type == 2){
-			List<HashMap<String, Object>> list = service.selectCode(Integer.parseInt(keyword));
-			mav.addObject("list", list);
-		}
+		List<HashMap<String, Object>> list = service.selectSearch(type, keyword);
+		mav.addObject("list", list);
+//		if(type == 1){
+//			List<HashMap<String, Object>> list = service.selectName(keyword);
+//			mav.addObject("list", list);
+//		}
+//		else if(type == 2){
+//			List<HashMap<String, Object>> list = service.selectCode(Integer.parseInt(keyword));
+//			mav.addObject("list", list);
+//		}
 		mav.setViewName("list");
 		return mav;
 	}

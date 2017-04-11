@@ -18,6 +18,21 @@
   	<servlet-name>dispatcher</servlet-name>
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <!-- spring한글처리(feat. post방식으로 보낼때 UTF-8형식 지정하기) -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
     <listener>
   	<listener-class>
   		org.springframework.web.context.ContextLoaderListener

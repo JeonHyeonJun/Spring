@@ -42,11 +42,13 @@ public class ProductService implements IProductService{
 		else
 			return false;
 	}
-	public List<HashMap<String, Object>> selectCode(int code){
-		return dao.selectCode(code);
-	}
-	public List<HashMap<String, Object>> selectName(String name){
-		return dao.selectName(name);
+
+	public List<HashMap<String, Object>> selectSearch(String type,String keyword){
+		HashMap<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("keyword", keyword);
+		List<HashMap<String, Object>> list = dao.selectSearch(params);
+		return list;
 	}
 	public List<HashMap<String, Object>> ProudctList(){
 		return dao.selectAll();

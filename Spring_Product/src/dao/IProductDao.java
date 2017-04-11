@@ -10,7 +10,6 @@ public interface IProductDao {
 	public int insertProduct(HashMap<String, Object> params);
 	public int updateProduct(HashMap<String, Object> params);
 	public int deleteProduct(int code);
-	public List<HashMap<String, Object>> selectCode(int code);
 	public List<HashMap<String, Object>> selectAll();
-	public List<HashMap<String, Object>> selectName(String name);
+	public List<HashMap<String, Object>> selectSearch(HashMap<String, Object> params);
 }
