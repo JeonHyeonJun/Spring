@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IBoardDao">
+	<sql id="title">
+		<choose>
+		<when test="title != null">#{title}</when>
+		<otherwise>'제목없음'</otherwise>
+		</choose>
+	</sql>
+	<sql id="name">
+		<choose>
+		<when test="name != null">#{name}</when>
+		<otherwise>'이름없음'</otherwise>
+		</choose>
+	</sql>
+	<sql id="content">
+		<choose>
+		<when test="content != null">#{content}</when>
+		<otherwise>'내용없음'</otherwise>
+		</choose>
+	</sql>
+	<sql id="email">
+		<choose>
+		<when test="email != null">#{email}</when>
+		<otherwise>'이메일없음'</otherwise>
+		</choose>
+	</sql>
+	<sql id="search">
+		<choose>
+		<when test="title != null">#{email}</when>
+		<when test=""></when>
+		<otherwise>'이메일없음'</otherwise>
+		</choose>
+	</sql>
+
+	<insert id="insertBoard" parameterType="board"
+	 useGeneratedKeys="true" keyProperty="num"><!-- auto_increment되는 값을 받아줌 -->
+		insert into board values(0,
+		<include refid="name"></include>, #{pass},
+		<include refid="content"></include>,
+		<include refid="email"></include>,
+		 0, sysdate(),
+		 <include refid="title"></include>,
+		 null,0
+		  )
+	</insert>
+	<update id="updateBoard" parameterType="board">
+		update board set pass = #{pass},
+		 name = <include refid="name"></include>, 
+		 email = <include refid="email"></include>,
+		 title = <include refid="title"></include>,
+		 content = <include refid="content"></include>,
+		 readcount = #{readcount},
+		 fileuri = #{fileuri},
+		 fileid = #{fileid}
+		 where num = #{num}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where num=#{num}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="board">
+		select * from board where num=#{num}
+	</select>
+	<select id="selectBoardLimit" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from board order by num desc limit #{skip}, #{count}
+	</select>
+	<select id="getBoardCount" resultType="int">
+		select count(*) from board
+	</select>
+</mapper>
