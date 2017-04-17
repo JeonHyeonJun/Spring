@@ -1,10 +1,13 @@
 package service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import dao.IBoardDao;
 import model.Board;
@@ -15,8 +18,26 @@ public class BoardService implements IBoardService{
 	private IBoardDao dao;
 
 	@Override
-	public void writeBoard(Board board) {
+	public void writeBoard(Board board, MultipartFile file) {
 		// TODO Auto-generated method stub
+		String path = "Upload/";
+		File folder = new File(path);
+		if(!folder.exists())
+			folder.mkdirs();
+		String fileName = file.getOriginalFilename();
+		String fileuri = path + fileName;
+		File localFile = new File(fileuri);
+		
+		try {
+			file.transferTo(localFile);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		board.setFileuri(fileuri);
 		dao.insertBoard(board);
 	}
 
@@ -45,13 +66,18 @@ public class BoardService implements IBoardService{
 		Board board = dao.selectOne(num);
 		board.setReadcount(board.getReadcount()+1);
 		dao.updateBoard(board);
-		return board;
+		return getBoard(num);
 	}
 	
 	@Override
 	public Board getBoard(int num) {
 		// TODO Auto-generated method stub
-		return dao.selectOne(num);
+		Board board = dao.selectOne(num);
+		String uri = board.getFileuri();
+		String[] pathArr = uri.split("/");
+		String filename = pathArr[pathArr.length-1];
+		board.setFileuri(filename);
+		return board;
 	}
 
 	@Override
@@ -86,6 +112,12 @@ public class BoardService implements IBoardService{
 		result.put("boardList", list);
 		
 		return result;
+	}
+
+	@Override
+	public String getFileUri(int num) {
+		// TODO Auto-generated method stub
+		return dao.selectOne(num).getFileuri();
 	}
 
 

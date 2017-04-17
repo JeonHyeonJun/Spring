@@ -9,12 +9,12 @@
 <body>
 	<center>
 		<h1>게시글 쓰기</h1><hr>
-	<form action="insert.do" method="Post">
+	<form action="insert.do" method="Post" enctype="multipart/form-data">
 		<table>
 		<tr><td style="background-color: yellow;">제목</td><td><input type="text" name="title"></td></tr>
 		<tr><td style="background-color: yellow;">비밀번호</td><td><input type="text" name="pass"></td></tr>
 		<tr><td style="background-color: yellow;">이메일</td><td><input type="text" name="email"></td></tr>
-		<tr><td style="background-color: yellow;">파일첨부</td></tr>
+		<tr><td style="background-color: yellow;">파일첨부</td><td><input type="file" name="ufile"></td></tr>
 		<tr><td style="background-color: yellow;">내용</td><td><textarea name="content" style="width: 500px; height: 300px"></textarea></td></tr>
 		<tr><td colspan="2" align="right"><input type="submit" value="등록"></td></tr>
 		</table>
