@@ -26,6 +26,8 @@
 			<mvc:exclude-mapping path="/login.do"/>
 			<mvc:exclude-mapping path="/createForm.do"/>
 			<mvc:exclude-mapping path="/create.do"/>
+			<mvc:exclude-mapping path="/idCheck.do"/>
+			<mvc:exclude-mapping path="/getBoardJson.do"/>
 				<!-- 요기까지 -->
 			<ref bean="loginCheckInterceptor"/>
 		</mvc:interceptor>
@@ -34,4 +36,6 @@
 			<bean id="logInterceptor" class="controller.LogInterceptor"></bean>
 		</mvc:interceptor> 
 	</mvc:interceptors>
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>

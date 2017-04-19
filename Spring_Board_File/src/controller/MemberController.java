@@ -1,11 +1,13 @@
 package controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.Member;
@@ -35,6 +37,15 @@ public class MemberController {
 			return "memberMain";
 		else
 			return "createForm";
+	}
+	@RequestMapping("idCheck.do")
+	public @ResponseBody HashMap<String, Object> idCheck(String id){
+		HashMap<String, Object> response = new HashMap<>();
+		boolean check = service.checkId(id);
+		response.put("result", check);
+		return response;
+
+		
 	}
 	@RequestMapping("login.do")
 	public ModelAndView login(String id, String pw, HttpSession session){
