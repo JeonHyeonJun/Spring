@@ -14,9 +14,11 @@ import org.springframework.web.servlet.view.AbstractView;
 public class DownloadView extends AbstractView{
 
 	private File file;
-	public DownloadView(File file) {
+	private String filename;
+	public DownloadView(File file, String filename) {
 		// TODO Auto-generated constructor stub
 		this.file = file;
+		this.filename = filename;
 	}
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest req, HttpServletResponse resp)
@@ -25,7 +27,7 @@ public class DownloadView extends AbstractView{
 		resp.setContentType("application/download; utf-8");
 		resp.setContentLength((int) file.length());
 		
-		String filename = new String(file.getName().getBytes("UTF-8"),"ISO-8859-1");
+		String filename = new String(this.filename.getBytes("UTF-8"),"ISO-8859-1");
 		resp.setHeader("Content-Disposition", "attachment; filename=\"" +filename+ "\";");
 		resp.setHeader("Content-Transfer-Encoding", "binary");
 		

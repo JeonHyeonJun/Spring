@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="email"></include>,
 		 0, sysdate(),
 		 <include refid="title"></include>,
-		 #{fileuri},0
+		 #{fileuri},#{fileid}
 		  )
 	</insert>
 	<update id="updateBoard" parameterType="board">
