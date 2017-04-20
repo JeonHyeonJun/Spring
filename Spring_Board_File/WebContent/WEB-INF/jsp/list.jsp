@@ -46,7 +46,7 @@
 					<a href="list.do?page=${last }">[마지막페이지]</a>
 				</c:if>
 
-		<br><img src="dog.gif" onclick="location.href='write.do'">
+		<br><img src="img/dog.gif" onclick="location.href='write.do'">
 		<br>글쓰고싶으면 이미지를 클릭하세욥
 	</center>
 	

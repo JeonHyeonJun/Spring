@@ -17,13 +17,13 @@
 		<h1>히어로즈오브더스톰</h1><hr>
 		<c:choose>
 			<c:when test="${id == null }">
-				<img src="hos.gif" width="200px" height="200px"><br>
+				<img src="img/hos.gif" width="200px" height="200px"><br>
 				<input type="button" value="회원가입" onclick="location.href='createForm.do'">
 				<input type="button" value="로그인" onclick="location.href='loginForm.do'">
 			</c:when>
 			<c:otherwise>
 				게시판으로 이동<br>
-				<a href="list.do"><img src="good.jpg"><br></a>
+				<a href="list.do"><img src="img/good.jpg"><br></a>
 				<input type="button" value="로그아웃" onclick="location.href='logout.do'"> 
 				<input type="button" value="비번변경" onclick="alert('만들려다가 귀찮아져서 관둠')">
 				<input type="button" value="회원탈퇴" onclick="alert('히히히 못가')">
