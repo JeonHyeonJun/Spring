@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into board values(0, #{title}, #{content}, #{writer}, sysdate(), 0, #{fileId}, #{writerIdx})
 	</insert>
 	<update id="updateBoard" parameterType="java.util.HashMap">
-		update board set title=#{title}, content=#{content}, readCount=#{readCount} where idx=#{idx}
+		update board set title=#{title}, content=#{content}, readCount=#{readCount}, fileId=#{fileId} where idx=#{idx}
 	</update>
 	<delete id="deleteBoard" parameterType="int">
 		delete from board where idx=#{idx}

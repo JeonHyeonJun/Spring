@@ -11,4 +11,5 @@ public interface IRepleDao {
 	public List<HashMap<String, Object>> selectList(int boardIdx);
 	public int updateGroup(HashMap<String, Object> params);
 	public int maxGroupSeq(int groupCode);
+	public List<HashMap<String, Object>> selectGroupCode(int groupCode);
 }

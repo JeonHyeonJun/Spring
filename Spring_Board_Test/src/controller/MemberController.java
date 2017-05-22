@@ -29,7 +29,7 @@ public class MemberController {
 		else if(memberService.selectName(name) != null){}
 		else
 			memberService.insertMember(id, pass, name);
-		return "main";
+		return "redirect:main.do";
 	}
 	
 	@RequestMapping("loginForm.do")

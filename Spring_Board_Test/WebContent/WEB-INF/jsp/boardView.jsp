@@ -16,6 +16,8 @@
   		var repleCount = ${fn:length(reple)};
   		for(var i=0; i<repleCount; i++){
   			$('#repleForm'+i).empty();
+  			$('#repleContent'+i).html($('#repleContent'+i).text().replace(/</gi, "&lt;").replace(/>/gi, "&gt;"));
+  			$('#updateForm'+i).show();
   		}
 		$('#repleForm'+idx).html("<form action='repleWrite.do' method='post'>"
 								 +"<textarea style='width: 85%; height: 100px; resize: none' id='content' name='content' maxlength='500'></textarea>"
@@ -26,6 +28,23 @@
 								 +"<input type='hidden' name='parent' value='"+repleIdx+"'>"
 								 +"</form>");
 	}
+	
+	function update(idx,repleIdx){
+  		var text = $('#repleContent'+idx).text();
+  		var repleCount = ${fn:length(reple)};
+  		for(var i=0; i<repleCount; i++){
+  			$('#repleForm'+i).empty();
+  			$('#repleContent'+i).html($('#repleContent'+i).text().replace(/</gi, "&lt;").replace(/>/gi, "&gt;"));
+  			$('#updateForm'+i).show();
+  		}
+  		$('#updateForm'+idx).hide();
+  		$('#repleContent'+idx).html("<form action='repleUpdate.do' method='post'>"
+				 +"<textarea style='width: 85%; height: 100px; resize: none' id='repleContent' name='content' maxlength='500'>"+text+"</textarea>"
+				 +"<input type='hidden' name='boardIdx' value='${board.idx }'>"
+				 +"<input type='hidden' name='idx' value='"+repleIdx+"'>"
+				 +"<input type='submit' value='수정'>"
+				 +"</form>")
+  	}
 </script>
 </head>
 <body>
@@ -34,7 +53,7 @@
 			<table border="1" width="80%" height="700px">
 				<tr><td colspan="4" align="right">조회수 : ${board.readCount }</td></tr>
 				<tr height="10%"><td align="center" width="10%">제목</td><td  width="50%">${board.title.replaceAll("<", "&lt;").replaceAll(">", "&gt;") }</td><td width="10%">글쓴이</td><td  width="30%">${board.writer }</td></tr>
-				<tr height="10%"><td align="center">사진</td><td colspan="3"></td></tr>
+				<tr height="10%"><td align="center">첨부파일</td><td colspan="3"><a href="download.do?fileId=${boardFile.fileId }">${boardFile.originFileName }</a></td></tr>
 				<tr height="80%"><td align="center">내용</td><td colspan="3">${board.content.replaceAll("<", "&lt;").replaceAll(">", "&gt;") }</td></tr>
 			</table>
 			
@@ -58,13 +77,27 @@
 								<b>${reple.writer }</b>
 							</td>
 							<td width="80%">
-								|
-								<c:if test="${reple.parentName != null }">
-									<b style="color: red;">@${reple.parentName }&nbsp;&nbsp;&nbsp;</b>
-								</c:if>
-								${reple.content }
-								<c:if test="${sessionScope.id != null }">
-									<a href="##" onclick="reple(${st.index},${reple.idx })"><font size="1px">답글달기</font></a>
+									|
+									<c:if test="${reple.isDelete == 'N' }">
+										<span id="repleContent${st.index }"><!--  
+										 --><c:if test="${reple.parentName != null }"><!-- 
+										 	--><b style="color: red;">@${reple.parentName }&nbsp;&nbsp;&nbsp;</b><!--
+										 --></c:if><!--
+											-->${reple.content }</span>
+											
+										<c:if test="${sessionScope.id != null }">
+											<a href="##" onclick="reple(${st.index},${reple.idx })"><font size="1px">답글달기</font></a>
+										</c:if>
+										<c:if test="${sessionScope.idx == reple.writerIdx }">
+											<span id="updateForm${st.index }">
+												<a href="##" onclick="update(${st.index},${reple.idx })"><font size="1px">수정</font></a>
+												<a href="repleDelete.do?idx=${reple.idx }&boardIdx=${reple.boardIdx}"><font size="1px">삭제</font></a>
+											</span>
+										</c:if>
+									</c:if>
+								
+								<c:if test="${reple.isDelete == 'Y' }">
+									<font color="gray">삭제된 댓글입니다.</font>
 								</c:if>
 							</td>
 							<td width="10%">${reple.writeDate }</td>
@@ -80,12 +113,12 @@
 							<input type="hidden" name="writer" value="${sessionScope.name }">
 							<input type="hidden" name="writerIdx" value="${sessionScope.idx }">
 								<c:if test="${sessionScope.id == null }">
-									<textarea id="content" name="content" readonly="readonly" style="width: 70%; resize: none;">로그인 후 이용해주세요</textarea>
+									<textarea id="content" name="content" readonly="readonly" style="width: 70%; height: 100px; resize: none;">로그인 후 이용해주세요</textarea>
 								</c:if>
 								<c:if test="${sessionScope.id != null }">
-									<textarea id="content" name="content" style="width: 70%; resize: none;"></textarea>
+									<textarea id="content" name="content" style="width: 70%; height: 100px; resize: none;"></textarea>
+									<input type="submit" value="댓글쓰기">
 								</c:if>
-							<input type="submit" value="댓글쓰기">
 						</form>
 					</div>
 			

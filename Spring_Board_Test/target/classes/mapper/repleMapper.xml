@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into reple values(0, #{boardIdx}, #{content}, #{writer}, sysdate(), 0, 0, 0, 0, "N", #{writerIdx}, null)
 	</insert>
 	<update id="updateReple" parameterType="java.util.HashMap">
-		update reple set content=#{content}, idDelete=${isDelete} where idx=#{idx}
+		update reple set content=#{content}, isDelete=#{isDelete} where idx=#{idx}
 	</update>
 	<delete id="deleteReple" parameterType="int">
 		delete from reple where idx=#{idx}
@@ -25,5 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<select id="maxGroupSeq" parameterType="int" resultType="int">
 		select max(groupSeq) from reple where groupCode=#{groupCode}
+	</select>
+	<select id="selectGroupCode" parameterType="int" resultType="java.util.HashMap">
+		select * from reple where groupCode=#{groupCode}
 	</select>
 </mapper>

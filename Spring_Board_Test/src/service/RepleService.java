@@ -58,12 +58,12 @@ public class RepleService implements IRepleService{
 	}
 
 	@Override
-	public boolean updateReple(int idx, String content, String isDelete) {
+	public boolean updateReple(int idx, String content) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> params = new HashMap<>();
 		params.put(Constant.Reple.IDX, idx);
 		params.put(Constant.Reple.CONTENT, content);
-		params.put(Constant.Reple.ISDELETE, isDelete);
+		params.put(Constant.Reple.ISDELETE, "N");
 		int result = repleDao.updateReple(params);
 		if(result > 0)
 			return true;
@@ -72,9 +72,24 @@ public class RepleService implements IRepleService{
 	}
 
 	@Override
-	public boolean deleteReple(int idx) {
+	public boolean deleteReple(int idx, int groupCode) {
 		// TODO Auto-generated method stub
-		int result = repleDao.deleteReple(idx);
+		HashMap<String, Object> params = repleDao.selectOne(idx);
+		params.put(Constant.Reple.IDX, idx);
+		params.put(Constant.Reple.CONTENT, params.get(Constant.Reple.CONTENT));
+		params.put(Constant.Reple.ISDELETE, "Y");
+		int result = repleDao.updateReple(params);
+		
+		List<HashMap<String, Object>> list = repleDao.selectGroupCode(groupCode);
+		boolean checkDeleteAll = true;
+		
+		for(int i=0; i<list.size(); i++){
+			if(list.get(i).get(Constant.Reple.ISDELETE).equals("N"))
+				checkDeleteAll = false;
+		}
+		if(checkDeleteAll)
+			repleDao.deleteReple(idx);
+
 		if(result > 0)
 			return true;
 		else
