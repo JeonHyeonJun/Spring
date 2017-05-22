@@ -54,7 +54,7 @@
 				<tr><td colspan="4" align="right">조회수 : ${board.readCount }</td></tr>
 				<tr height="10%"><td align="center" width="10%">제목</td><td  width="50%">${board.title.replaceAll("<", "&lt;").replaceAll(">", "&gt;") }</td><td width="10%">글쓴이</td><td  width="30%">${board.writer }</td></tr>
 				<tr height="10%"><td align="center">첨부파일</td><td colspan="3"><a href="download.do?fileId=${boardFile.fileId }">${boardFile.originFileName }</a></td></tr>
-				<tr height="80%"><td align="center">내용</td><td colspan="3">${board.content.replaceAll("<", "&lt;").replaceAll(">", "&gt;") }</td></tr>
+				<tr height="80%"><td align="center">내용</td><td colspan="3">${board.content }</td></tr>
 			</table>
 			
 				
@@ -68,7 +68,11 @@
 			</form>
 			
 			
-
+		</center>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<font size="30px">댓글 ${fn:length(reple)}개</font>
+		<center>
 				<table width="80%" style="background-color: lightgray">
 					<c:forEach items="${reple }" var="reple" varStatus="st">
 						<tr>
@@ -83,7 +87,7 @@
 										 --><c:if test="${reple.parentName != null }"><!-- 
 										 	--><b style="color: red;">@${reple.parentName }&nbsp;&nbsp;&nbsp;</b><!--
 										 --></c:if><!--
-											-->${reple.content }</span>
+											-->${reple.content.replaceAll("<", "&lt;").replaceAll(">", "&gt;") }</span>
 											
 										<c:if test="${sessionScope.id != null }">
 											<a href="##" onclick="reple(${st.index},${reple.idx })"><font size="1px">답글달기</font></a>
