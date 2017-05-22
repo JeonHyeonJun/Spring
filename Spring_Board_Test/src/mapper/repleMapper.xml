@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IRepleDao">
+	<insert id="insertReple" parameterType="java.util.HashMap"
+	keyProperty="idx" useGeneratedKeys="true">
+		insert into reple values(0, #{boardIdx}, #{content}, #{writer}, sysdate(), 0, 0, 0, 0, "N", #{writerIdx}, null)
+	</insert>
+	<update id="updateReple" parameterType="java.util.HashMap">
+		update reple set content=#{content}, idDelete=${isDelete} where idx=#{idx}
+	</update>
+	<delete id="deleteReple" parameterType="int">
+		delete from reple where idx=#{idx}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
+		select * from reple where idx=#{idx}
+	</select>
+	<select id="selectList" parameterType="int" resultType="java.util.HashMap">
+		select * from reple where boardIdx=#{boardIdx} order by groupCode asc, groupSeq asc
+	</select>
+	<update id="updateGroup" parameterType="java.util.HashMap">
+		update reple set groupCode=#{groupCode}, groupSeq=#{groupSeq}, groupLv=#{groupLv}, parent=#{parent}, parentName=#{parentName} 
+		where idx=#{idx}
+	</update>
+	<select id="maxGroupSeq" parameterType="int" resultType="int">
+		select max(groupSeq) from reple where groupCode=#{groupCode}
+	</select>
+</mapper>

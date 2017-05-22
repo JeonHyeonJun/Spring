@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IFileDao">
+	<insert id="insertFile" parameterType="java.util.HashMap">
+		insert into file values(0, #{originFileName}, #{uri})
+	</insert>
+	<update id="updateFile" parameterType="java.util.HashMap">
+		update file set originFileName=#{originFileName}, uri=#{uri} where fileId=#{fileId}
+	</update>
+	<delete id="deleteFile" parameterType="int">
+		delete from file where fileId=#{fileId}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
+		select * from file where fileId=#{fileId}
+	</select>
+</mapper>

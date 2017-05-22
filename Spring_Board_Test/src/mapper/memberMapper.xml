@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.IMemberDao">
+	<insert id="insertMember" parameterType="java.util.HashMap">
+		insert into member values(0, #{id}, #{pass}, #{name})
+	</insert>
+	<update id="updateMember" parameterType="java.util.HashMap">
+		update member set pass=#{pass}, name=#{name} where idx=#{idx}
+	</update>
+	<delete id="deleteMember" parameterType="int">
+		delete from member where idx=#{idx}
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
+		select * from member where idx=#{idx}
+	</select>
+	<select id="selectId" parameterType="String" resultType="java.util.HashMap">
+		select * from member where id=#{id}
+	</select>
+	<select id="selectName" parameterType="String" resultType="java.util.HashMap">
+		select * from member where name=#{name}
+	</select>
+</mapper>
