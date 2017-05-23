@@ -18,7 +18,6 @@
 		$('#id').keyup(function(){
 			if(!regId.test($('#id').val())){
 				$('#idCheck').html('<font color="red">소문자 또는 소문자+숫자 6~20자</font>');
-				statusOfId = false;
 			}else{
 				var inputid = $('#id').val();
  				$.ajax({ 
@@ -44,18 +43,21 @@
 		});
 		
 	    $('#pass').keyup(function(){
+	    	if( $('#pass').val() != ""){
 				if(!regPassword.test($('#pass').val())){
-					checkPass();
 					$('#passCheck').html('<font color="red">대소문자, 숫자, 특수문자를 혼합하여 6~20자 이내</font>');
 					
 				}else {
-					checkPass();
 					$('#passCheck').html('<font color="green">사용가능</font>');
+					if($('#pass2').val() != "")
+						checkPass();
 				}
-			});
+	    	}
+		});
 			
 			$('#pass2').keyup(function(){
-				checkPass();
+				if($('#pass2').val() != "")
+					checkPass();
 			});
 			
 			
