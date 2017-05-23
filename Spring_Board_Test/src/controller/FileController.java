@@ -30,7 +30,6 @@ public class FileController {
 	//db에 저장된 이미지 출력
 	@RequestMapping(value = "/imageShow/{fileId}.do", method = {RequestMethod.GET})
 	public void imageShow(@PathVariable("fileId") int fileId, HttpServletResponse response) throws IOException, SerialException, SQLException {
-	
 		HashMap<String, Object> boardfile = fileService.selectOne(fileId);
 		
 		response.setContentType("images/jpg; utf-8");

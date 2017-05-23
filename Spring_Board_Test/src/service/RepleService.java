@@ -88,7 +88,7 @@ public class RepleService implements IRepleService{
 				checkDeleteAll = false;
 		}
 		if(checkDeleteAll)
-			repleDao.deleteReple(idx);
+			repleDao.deleteReple(groupCode);
 
 		if(result > 0)
 			return true;

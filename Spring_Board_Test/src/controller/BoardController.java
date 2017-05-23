@@ -27,14 +27,23 @@ public class BoardController {
 	@Autowired 
 	private IFileService fileService;
 
+	
 	@RequestMapping("main.do")
-	public ModelAndView mainPage(@RequestParam(defaultValue="1")int page){
+	public ModelAndView boardMain(@RequestParam(defaultValue="1")int page){
 		HashMap<String, Object> board = boardService.selectList(page);
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(board);
-		mav.setViewName("main");
+		mav.setViewName("boardMain");
 		return mav;
 	}
+//	@RequestMapping("main.do")
+//	public ModelAndView mainPage(@RequestParam(defaultValue="1")int page){
+//		HashMap<String, Object> board = boardService.selectList(page);
+//		ModelAndView mav = new ModelAndView();
+//		mav.addAllObjects(board);
+//		mav.setViewName("main");
+//		return mav;
+//	}
 	
 	@RequestMapping("boardWriteForm.do")
 	public String boardWriteForm(){

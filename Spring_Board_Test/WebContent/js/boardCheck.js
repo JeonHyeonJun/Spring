@@ -10,6 +10,10 @@ function boardCheck() {
 		alert("내용을 입력해주세요");
 		return false;
 	}
+	if (content.length > 10000) {
+		alert("내용은 10000자 이하로 작성가능합니다");
+		return false;
+	}
 	return true;
 }
 

@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
+
+    <title>게시글 상세보기</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/shop-item.css" rel="stylesheet">
 <script
   src="https://code.jquery.com/jquery-2.2.4.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -95,17 +103,76 @@
 </script>
 </head>
 <body>
-	<center>
-		<h1>회원가입</h1><hr>
-		<form action="join.do" method="post">
-			<table>
-				<tr><td>아이디</td><td><input type="text" id="id" name="id"></td><td><span id="idCheck"></span></td></tr>
-				<tr><td>비밀번호</td><td><input type="password" id="pass" name="pass"></td><td><span id="passCheck"></span></td></tr>
-				<tr><td>비밀번호확인</td><td><input type="password" id="pass2" name="pass2"></td><td><span id="pass2Check"></span></td></tr>
-				<tr><td>닉네임</td><td><input type="text" id="name" name="name"></td><td><span id="nameCheck"></span></td></tr>
-				<tr><td></td><td><input type="submit" value="가입" onclick="return joinCheck()"><input type="button" value="돌아가기" onclick="location.href='main.do'"></td></tr>
-			</table>
-		</form>
-	</center>
+	<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="main.do">Spring Board</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                	<c:if test="${sessionScope.id != null }">
+	                    <li>
+	                        <a href="logout.do">로그아웃</a>
+	                    </li>
+                    </c:if>
+                    <c:if test="${sessionScope.id == null }">
+	                    <li>
+	                        <a href="joinForm.do">회원가입</a>
+	                    </li>
+	                    <li>
+	                        <a href="loginForm.do">로그인</a>
+	                    </li>
+                    </c:if>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <div class="container">
+    	<div class="row">
+    		<center>
+				<h1 class="page-header">회원가입</h1>
+				<form action="join.do" method="post">
+					  <div class="col-xs-4" style="left: 35%">
+		    			<input type="text" id="id" name="id" class="form-control" placeholder="아이디"><span id="idCheck"></span>
+		  			  </div>
+		  			  <br><br><br><br>
+		  			  <div class="col-xs-4" style="left: 35%">
+		    			<input type="password" id="pass" name="pass" class="form-control" placeholder="비밀번호"><span id="passCheck"></span>
+		  			  </div>
+		  			  <br><br><br><br>
+		  			  <div class="col-xs-4" style="left: 35%">
+		    			<input type="password" id="pass2" name="pass2" class="form-control" placeholder="비밀번호확인"><span id="pass2Check"></span>
+		  			  </div>
+		  			  <br><br><br><br>
+		  			  <div class="col-xs-4" style="left: 35%">
+		    			<input type="text" id="name" name="name" class="form-control" placeholder="닉네임"><span id="nameCheck"></span>
+		  			  </div>
+		  			  <br><br><br><br>
+		  			  <input type="submit" class="btn btn-success" value="가입" onclick="return joinCheck()">
+		  			  <input type="button" class="btn btn-success" value="돌아가기" onclick="location.href='main.do'">
+					
+				</form>
+			</center>
+		</div>
+	</div>
+	
+	    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

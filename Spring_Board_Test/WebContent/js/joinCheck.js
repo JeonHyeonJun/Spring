@@ -5,7 +5,12 @@ function joinCheck() {
 		return false;
 	}
 	if ($('#idCheck').text() == "중복") {
-		alert("아이디가 이미 사용중입니다.");
+		alert("아이디가 이미 사용중입니다");
+		$('#id').focus();
+		return false;
+	}
+	if ($('#idCheck').text() != "사용가능") {
+		alert("아이디 형식이 올바르지 않습니다");
 		$('#id').focus();
 		return false;
 	}
@@ -15,7 +20,7 @@ function joinCheck() {
 		return false;
 	}
 	if ($('#passCheck').text() != "사용가능") {
-		alert("비밀번호 형식이 맞지않습니다.");
+		alert("비밀번호 형식이 맞지않습니다");
 		$('#pass').focus();
 		return false;
 	}
@@ -24,7 +29,7 @@ function joinCheck() {
 		$('#pass2').focus();
 		return false;
 	}
-	if ($('#pass2Check').text() == "불일치") {
+	if ($('#pass2Check').text() != "일치") {
 		alert("비밀번호가 일치하지 않습니다.");
 		$('#pass2').focus();
 		return false;

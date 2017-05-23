@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update reple set content=#{content}, isDelete=#{isDelete} where idx=#{idx}
 	</update>
 	<delete id="deleteReple" parameterType="int">
-		delete from reple where idx=#{idx}
+		delete from reple where groupCode=#{groupCode}
 	</delete>
 	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
 		select * from reple where idx=#{idx}

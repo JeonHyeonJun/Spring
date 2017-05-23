@@ -90,7 +90,6 @@ public class BoardService implements IBoardService{
 		int fileid = (int)boardDao.selectOne(idx).get(Constant.Board.FILEID);
 		if(fileid != 0){
 			fileid = (int)boardDao.selectOne(idx).get(Constant.Board.FILEID);
-			fileuri = (String)fileDao.selectOne(fileid).get(Constant.File.URI);	
 		}
 		
 		HashMap<String, Object> boardFile = new HashMap<>();
@@ -164,7 +163,7 @@ public class BoardService implements IBoardService{
 	public HashMap<String, Object> selectList(int page) {
 		// TODO Auto-generated method stub
 
-		int count = 10;	
+		int count = 9;	
 		int skip = (page-1) * count;	
 		
 		
