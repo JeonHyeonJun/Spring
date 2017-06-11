@@ -28,28 +28,6 @@ public class MemberService implements IMemberService{
 			return false;
 	}
 
-	@Override
-	public boolean updateMember(String pass, String name) {
-		// TODO Auto-generated method stub
-		HashMap<String, Object> params = new HashMap<>();
-		params.put(Constant.Member.PASS, pass);
-		params.put(Constant.Member.NAME, name);
-		int result = memberDao.updateMember(params);
-		if(result > 0)
-			return true;
-		else
-			return false;
-	}
-
-	@Override
-	public boolean deleteMember(int idx) {
-		// TODO Auto-generated method stub
-		int result = memberDao.deleteMember(idx);
-		if(result > 0)
-			return true;
-		else
-			return false;
-	}
 
 	@Override
 	public HashMap<String, Object> selectOne(int idx) {

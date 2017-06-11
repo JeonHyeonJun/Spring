@@ -12,15 +12,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import commons.Constant;
 import service.IBoardService;
+import service.IRepleService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:WebContent/WEB-INF/dispatcher-servlet.xml", 
 		"file:WebContent/WEB-INF/rootContext.xml"})
-public class BoardServiceTest {
+public class RepleServiceTest {
 	
 	@Autowired
-	private IBoardService boardService;
+	private IRepleService repleService;
 
 	final int IDX = 1;
 
@@ -37,33 +38,35 @@ public class BoardServiceTest {
 	}
 	
 	@Test
-	public void boardTest(){
+	public void repleTest(){
 		//삽입
-		String title = "제목";
+		int boardIdx = 2;
 		String content = "내용";
 		String writer = "글쓴이";
 		int fileId = 0;
 		int writerIdx = 1;
-		MockMultipartFile file = new MockMultipartFile("file", "orig", null, "bar".getBytes());
+		int parent = 0;
+		
+		int cnt = repleService.selectList(boardIdx).size();
 
-		boolean result = boardService.insertBoard(title, content, writer, fileId, writerIdx, file);
+		boolean result = repleService.insertReple(boardIdx, content, writer, writerIdx, parent);
 		Assert.assertTrue(result);
 		
+		//리스트
+		int cnt2 = repleService.selectList(boardIdx).size();
+		Assert.assertEquals(cnt+1, cnt2);
+		
 		//수정
-		title = "제목변경";
 		content = "내용변경";
-		int readCount = 1;
-		boolean result2 = boardService.updateBoard(IDX, title, content, readCount, file);
+		boolean result2 = repleService.updateReple(IDX, content);
 		Assert.assertTrue(result2);
 		
 		//삭제
-//		boolean result3 = boardService.deleteBoard(1);
-//		Assert.assertTrue(result3);
+		int groupCode = 0;
+		boolean result3 = repleService.deleteReple(IDX, groupCode);
+		Assert.assertTrue(result3);
 		
-		//getBoard
-		int rcnt1= Integer.parseInt(boardService.selectOne(IDX).get(Constant.Board.READCOUNT).toString());
-		int rcnt2 = Integer.parseInt(boardService.getBoard(IDX).get(Constant.Board.READCOUNT).toString());
-		Assert.assertEquals(rcnt1+1, rcnt2);
+
 	}
 
 }
